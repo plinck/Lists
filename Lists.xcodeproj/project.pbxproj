@@ -12,6 +12,7 @@
 		DA2E7F4921711C9F00009CCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA2E7F4721711C9F00009CCE /* Main.storyboard */; };
 		DA2E7F4B21711CA000009CCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA2E7F4A21711CA000009CCE /* Assets.xcassets */; };
 		DA2E7F4E21711CA000009CCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA2E7F4C21711CA000009CCE /* LaunchScreen.storyboard */; };
+		DA2E7F5821711D8C00009CCE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2E7F5721711D8C00009CCE /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,8 @@
 		DA2E7F4A21711CA000009CCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA2E7F4D21711CA000009CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA2E7F4F21711CA000009CCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA2E7F5521711D8900009CCE /* Lists.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lists.entitlements; sourceTree = "<group>"; };
+		DA2E7F5721711D8C00009CCE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2E7F5821711D8C00009CCE /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +44,7 @@
 			children = (
 				DA2E7F4221711C9F00009CCE /* Lists */,
 				DA2E7F4121711C9F00009CCE /* Products */,
+				DA2E7F5621711D8C00009CCE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +59,7 @@
 		DA2E7F4221711C9F00009CCE /* Lists */ = {
 			isa = PBXGroup;
 			children = (
+				DA2E7F5521711D8900009CCE /* Lists.entitlements */,
 				DA2E7F4321711C9F00009CCE /* AppDelegate.swift */,
 				DA2E7F4521711C9F00009CCE /* ViewController.swift */,
 				DA2E7F4721711C9F00009CCE /* Main.storyboard */,
@@ -62,6 +68,14 @@
 				DA2E7F4F21711CA000009CCE /* Info.plist */,
 			);
 			path = Lists;
+			sourceTree = "<group>";
+		};
+		DA2E7F5621711D8C00009CCE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA2E7F5721711D8C00009CCE /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +110,14 @@
 				TargetAttributes = {
 					DA2E7F3F21711C9F00009CCE = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -282,6 +304,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Lists/Lists.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 733J326MK6;
 				INFOPLIST_FILE = Lists/Info.plist;
@@ -300,6 +323,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Lists/Lists.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 733J326MK6;
 				INFOPLIST_FILE = Lists/Info.plist;

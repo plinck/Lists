@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ListViewController.swift
 //  Lists
 //
 //  Created by Paul Linck on 10/12/18.
@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class ViewController: UIViewController {
+class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

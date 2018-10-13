@@ -44,7 +44,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="3qj-Uj-ABR"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVX-Vd-DcI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="messageLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7B-Wa-tCE">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -56,22 +56,27 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="P7B-Wa-tCE" secondAttribute="trailing" id="3kd-dG-vfK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zhf-KW-Dx7" secondAttribute="bottom" id="8dh-YJ-W4C"/>
-                            <constraint firstItem="sVX-Vd-DcI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8x9-cx-KpD"/>
                             <constraint firstItem="dea-Pl-zWc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="FeJ-WU-9wC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zhf-KW-Dx7" secondAttribute="trailing" id="GX2-iA-Fec"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="P7B-Wa-tCE" secondAttribute="bottom" id="L5O-QK-xBX"/>
                             <constraint firstItem="dea-Pl-zWc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TU8-LE-zlN"/>
                             <constraint firstItem="zhf-KW-Dx7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="W9h-bp-Zeg"/>
-                            <constraint firstItem="sVX-Vd-DcI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ao8-k9-yep"/>
+                            <constraint firstItem="P7B-Wa-tCE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ccK-QM-15K"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dea-Pl-zWc" secondAttribute="trailing" id="md4-43-MeD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sVX-Vd-DcI" secondAttribute="bottom" id="pC8-h7-gum"/>
-                            <constraint firstItem="sVX-Vd-DcI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ren-UV-JgF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dea-Pl-zWc" secondAttribute="bottom" id="wmC-ep-l0c"/>
                             <constraint firstItem="zhf-KW-Dx7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yKO-EH-KIb"/>
+                            <constraint firstItem="P7B-Wa-tCE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yPi-3f-8Dw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="6bv-b6-vaJ"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="dea-Pl-zWc" id="6Kz-Fc-QkU"/>
+                        <outlet property="messageLabel" destination="P7B-Wa-tCE" id="xMl-P3-nUl"/>
+                        <outlet property="tableView" destination="zhf-KW-Dx7" id="oXz-us-5Zx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

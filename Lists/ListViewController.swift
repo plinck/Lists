@@ -8,15 +8,34 @@
 
 import UIKit
 import CloudKit
+import SVProgressHUD
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    static let ListCell = "ListCell"
+    
+    @IBOutlet weak var tableView: UITableView!              // Explain weak again?
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var messageLabel: UILabel!
+
+    var lists = [CKRecord]()                // Array to hold tableView items
+    // var alists: Array<CKRecord> = Array()   // Alternate method to initialize array
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchUserRecordID()
+        // fetchUserRecordID()                  // This was in the intro not needed now
+        setupView()
     }
 
+    // Prepare the user interface for fetching the list of records in the database
+    // Hide all and spin the activity indicator
+    private func setupView() {
+        tableView.isHidden = true
+        messageLabel.isHidden = true
+        activityIndicatorView.startAnimating()
+    }
+    
     private func fetchUserRecordID () {
         // Fetch Default Container
         let defaultContainer = CKContainer.default()
@@ -57,4 +76,39 @@ class ListViewController: UIViewController {
     }
     
 } // class
+
+
+// Put delegate methods in class extension
+// Ask why this is an extenstion vs part of the class
+extension ListViewController
+{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return lists.count
+    }
+    
+    // Puts the listName in the correct row of the tableView
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // DeQueue Reusable Cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ListViewController.ListCell, for: indexPath)
+        
+        // Configure Cell
+        cell.accessoryType = .detailDisclosureButton
+        
+        // Fetch Record
+        let list = lists[indexPath.row]
+        
+        // put the name field of the record into the cell - this is shopping list name
+        if let listName = list.object(forKey: "name") as? String {
+            cell.textLabel?.text = listName
+        } else {
+            cell.textLabel?.text = "_"
+        }
+        
+        return cell
+    }
+}
 

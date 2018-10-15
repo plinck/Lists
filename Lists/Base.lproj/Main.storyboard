@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zhf-KW-Dx7">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListCell" textLabel="J2Y-64-mDN" style="IBUITableViewCellStyleDefault" id="FGF-m1-ON1">
@@ -45,10 +45,10 @@
                                 </connections>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dea-Pl-zWc">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="messageLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7B-Wa-tCE">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -71,7 +71,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="AXz-fK-KWl">
+                            <connections>
+                                <segue destination="Zcd-Hn-Mr8" kind="showDetail" identifier="ListDetail" id="3ww-G7-oXO"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="6bv-b6-vaJ"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="dea-Pl-zWc" id="6Kz-Fc-QkU"/>
                         <outlet property="messageLabel" destination="P7B-Wa-tCE" id="xMl-P3-nUl"/>
@@ -80,18 +88,73 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="133.5832083958021"/>
+            <point key="canvasLocation" x="919" y="107"/>
+        </scene>
+        <!--Add List View Controller-->
+        <scene sceneID="zux-Yc-i9b">
+            <objects>
+                <viewController id="Zcd-Hn-Mr8" userLabel="Add List View Controller" customClass="AddListViewController" customModule="Lists" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aeF-co-cxc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pOm-fv-VTf">
+                                <rect key="frame" x="159" y="80" width="57" height="58"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agm-AA-QNM">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Add List" id="svH-0b-0LL">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="4f7-Zl-reN">
+                                            <connections>
+                                                <action selector="cancelWithSender:" destination="Zcd-Hn-Mr8" id="AUr-eP-u4g"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="OXO-Jd-BEy">
+                                            <connections>
+                                                <action selector="saveWithSender:" destination="Zcd-Hn-Mr8" id="uo2-7B-DcZ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="agm-AA-QNM" firstAttribute="centerX" secondItem="pOm-fv-VTf" secondAttribute="centerX" id="TMm-q5-aia"/>
+                            <constraint firstItem="Rmd-Ya-LfO" firstAttribute="bottom" secondItem="pOm-fv-VTf" secondAttribute="bottom" constant="529" id="W9H-4b-BLI"/>
+                            <constraint firstAttribute="trailing" secondItem="agm-AA-QNM" secondAttribute="trailing" id="ZK5-zh-b34"/>
+                            <constraint firstItem="agm-AA-QNM" firstAttribute="leading" secondItem="aeF-co-cxc" secondAttribute="leading" id="fgw-Gb-5N1"/>
+                            <constraint firstItem="agm-AA-QNM" firstAttribute="top" secondItem="Rmd-Ya-LfO" secondAttribute="top" constant="8" id="uDt-bp-Qmi"/>
+                            <constraint firstItem="pOm-fv-VTf" firstAttribute="top" secondItem="agm-AA-QNM" secondAttribute="bottom" constant="8" id="wsJ-3H-ftI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Rmd-Ya-LfO"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="pOm-fv-VTf" id="4cz-dG-KnA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wAx-V7-MLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1679" y="107"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lMK-8t-i4p">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GYF-cY-qwi" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="GYF-cY-qwi" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QDE-nX-IL7">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="S1m-2W-3i6">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="GT6-AN-Pk8"/>
                     </connections>

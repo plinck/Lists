@@ -14,6 +14,7 @@
 		DA2E7F4B21711CA000009CCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA2E7F4A21711CA000009CCE /* Assets.xcassets */; };
 		DA2E7F4E21711CA000009CCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA2E7F4C21711CA000009CCE /* LaunchScreen.storyboard */; };
 		DA2E7F5821711D8C00009CCE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA2E7F5721711D8C00009CCE /* CloudKit.framework */; };
+		DAF24A4621750C93004365A8 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF24A4521750C93004365A8 /* AddListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		DA2E7F4F21711CA000009CCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA2E7F5521711D8900009CCE /* Lists.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lists.entitlements; sourceTree = "<group>"; };
 		DA2E7F5721711D8C00009CCE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		DAF24A4521750C93004365A8 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
 		E98C2BF70CB3DA8CD86834D5 /* Pods-Lists.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lists.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lists/Pods-Lists.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +79,7 @@
 				DA2E7F5521711D8900009CCE /* Lists.entitlements */,
 				DA2E7F4321711C9F00009CCE /* AppDelegate.swift */,
 				DA2E7F4521711C9F00009CCE /* ListViewController.swift */,
+				DAF24A4521750C93004365A8 /* AddListViewController.swift */,
 				DA2E7F4721711C9F00009CCE /* Main.storyboard */,
 				DA2E7F4A21711CA000009CCE /* Assets.xcassets */,
 				DA2E7F4C21711CA000009CCE /* LaunchScreen.storyboard */,
@@ -222,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAF24A4621750C93004365A8 /* AddListViewController.swift in Sources */,
 				DA2E7F4621711C9F00009CCE /* ListViewController.swift in Sources */,
 				DA2E7F4421711C9F00009CCE /* AppDelegate.swift in Sources */,
 			);

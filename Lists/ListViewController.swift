@@ -26,14 +26,57 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // fetchUserRecordID()                  // This was in the intro not needed now
         setupView()
+        fetchLists()
     }
-
+    
+    private func fetchLists() {
+        // Private Database
+        let privateDatabase = CKContainer.default().privateCloudDatabase
+        
+        // Init Query
+        let query = CKQuery(recordType: "Lists", predicate: NSPredicate(value: true))
+        
+        // Configure Query
+        query.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        // perform Query
+        privateDatabase.perform(query, inZoneWith: nil) { // trailing completion handler syntax
+            (records, error) in
+                guard error == nil else {                       // if error not nil, print and stop
+                    print(error?.localizedDescription as Any)
+                    return
+                }
+            
+                records?.forEach( { (record) in
+                    print(record.value(forKey: "name") ?? "")
+                    self.lists.append(record)
+                    DispatchQueue.main.sync {
+                        self.tableView.reloadData()
+                        self.messageLabel.text = ""
+                        self.updateView()
+                    }
+                })  // forEach record in
+        }
+        self.updateView()
+    }
+    
     // Prepare the user interface for fetching the list of records in the database
     // Hide all and spin the activity indicator
     private func setupView() {
         tableView.isHidden = true
         messageLabel.isHidden = true
+        messageLabel.text = "No Records Found"
         activityIndicatorView.startAnimating()
+    }
+    
+    // update the user interface based on the contents of the lists property
+    private func updateView() {
+        let hasRecords = self.lists.count > 0
+        
+        self.tableView.isHidden = !hasRecords           // if no records dont show table view
+        messageLabel.isHidden = hasRecords              // if any records, hide message but show tableView
+        activityIndicatorView.stopAnimating()           // stop spinenr
+        activityIndicatorView.isHidden = true
     }
     
     private func fetchUserRecordID () {

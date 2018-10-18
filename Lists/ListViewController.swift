@@ -168,7 +168,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             
                 // Set the view controller's list so it has it when invoked
                 addListViewController.list = list
+                
             }
+            selection = nil         // to clear which one was selected so add can work
         default:
             break
         } // Switch

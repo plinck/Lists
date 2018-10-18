@@ -11,7 +11,8 @@ import CloudKit
 import SVProgressHUD
 
 // TODO: - finish comments to explain everything
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+// Notice the AddListViewControllerDelegate to get notifications from the add when the list changes
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddListViewControllerDelegate {
 
     static let ListCell = "ListCell"
     
@@ -21,7 +22,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     var lists = [CKRecord]()                // Array to hold tableView items
     // var alists: Array<CKRecord> = Array()   // Alternate method to initialize array
+    
+    var selection: Int?             // Holds which record in the lists that is selected
 
+    // Main override that runs whenever view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -127,6 +131,60 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
+    // MARK: -
+    // MARK: Seque Lifecycle
+    // To edit a record, the user needs to tap the accessory button of a table view row.
+    // This means that we need to implement the tableView(_:accessoryButtonTappedForRowWithIndexPath:)
+    // method of the UITableViewDelegate protocol
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        //
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Set which one was selected
+        selection = indexPath.row
+        
+        // perform Seque - the name of the Seque is ListDetail - propery on the Seque set in StoryBoard
+        performSegue(withIdentifier: "ListDetail", sender: self)
+    }
+    
+    // override the prepare to get seque ready with which one selected
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+
+        switch identifier {
+            
+        case "ListDetail":
+            // Fetch Destination View Controller
+            let addListViewController = segue.destination as! AddListViewController
+            
+            // setup delegate
+            addListViewController.delegate = self       // This class / object provides the delegate
+            
+            // only do this if one is selected
+            if let selection = selection {
+                // get specific selected list
+                let list = lists[selection]
+            
+                // Set the view controller's list so it has it when invoked
+                addListViewController.list = list
+            }
+        default:
+            break
+        } // Switch
+        
+    }
+    
+    // We're almost there. When the segue with identifier ListDetail is performed,
+    // we need to configure the AddListViewController instance that is pushed onto the navigation stack.
+    // We do this in prepareForSegue(_:sender:).
+    
+    // The segue hands us a reference to the destination view controller,
+    // the AddListViewController instance. We set the delegate property, and,
+    // if a shopping list is updated, we set the view controller's list property to the selected record.
+    
+
+    
 } // class
 
 
@@ -163,5 +221,60 @@ extension ListViewController
         
         return cell
     }
+}
+
+// MARK: -
+// This is where the user defined delegates go.  The system delegates are in another extenstion
+// in BNR I out the user defined ones in an extension but not the system ones
+extension ListViewController
+{
+    // MARK: -
+    // the delegate method for adding to the list
+    // I honestly dont like the way he did this but more than one way to skin a cat
+    // I would have create one delegate to handle add and update
+    // He is doing this my just having diffetne function with slightly different signatures
+    func controller(controller: AddListViewController, didAddList list: CKRecord) {
+        // append the added one to the list
+        lists.append(list)
+
+        // sort
+        sortLists()
+        
+        // reload the table view since items in list changed
+        tableView.reloadData()
+        
+        // Update View
+        updateView()
+    }
+    
+    // MARK: -
+    // the delegate method for updating the list
+    func controller(controller: AddListViewController, didUpdateList list: CKRecord) {
+        // no need to change the list since its done
+        
+        // sort
+        sortLists()
+        
+        // reload the table view since items in list changed
+        tableView.reloadData()
+        
+        // Because we're not adding a record, we only need to sort the array of records and reload the table view. There's no need to call updateView on the view controller since the array of records is, by definition, not empty
+    }
+    
+    // Sort the list
+    private func sortLists() {
+        self.lists.sort {
+            var result = false
+            let name0 = $0["name"] as? String
+            let name1 = $1["name"] as? String
+            
+            if let listName0 = name0, let listName1 = name1 {
+                result = listName0.localizedCaseInsensitiveCompare(listName1) == .orderedAscending
+            }
+            
+            return result
+        }
+    }
+    
 }
 

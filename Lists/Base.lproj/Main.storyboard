@@ -103,6 +103,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="nameTextField:" destination="Zcd-Hn-Mr8" eventType="editingChanged" id="way-ft-Xhf"/>
+                                </connections>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agm-AA-QNM">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -135,6 +138,7 @@
                     </view>
                     <connections>
                         <outlet property="nameTextField" destination="pOm-fv-VTf" id="4cz-dG-KnA"/>
+                        <outlet property="saveButton" destination="OXO-Jd-BEy" id="cz3-PB-YbX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wAx-V7-MLu" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,6 +10,7 @@ import UIKit
 import CloudKit
 import SVProgressHUD
 
+// TODO: - finish comments to explain everything
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     static let ListCell = "ListCell"
@@ -29,14 +30,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         fetchLists()
     }
     
+    // MARK: -
+    // Get a list of all the shopping list names from cloudkit
     private func fetchLists() {
-        // Private Database
+        // Private Database in the _defaultZone
+        // TODO: - Add error handling to ensure user is logged into iCloud
         let privateDatabase = CKContainer.default().privateCloudDatabase
         
-        // Init Query
+        // TODO: - Why do we need NSPredicate of true - i.e. what does true mean in this context
+        // Initialize Query - just sets up which record type (table) you want to access
         let query = CKQuery(recordType: "Lists", predicate: NSPredicate(value: true))
         
-        // Configure Query
+        // Configure Query sorting.  sortDesciptors is collection (array) of fields to sort by
         query.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         // perform Query
@@ -47,6 +52,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     return
                 }
             
+                // Remember.  Cloudkit completions are done on background task so must dispatch
+                // UI things to the main thread
                 records?.forEach( { (record) in
                     print(record.value(forKey: "name") ?? "")
                     self.lists.append(record)
@@ -70,6 +77,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // update the user interface based on the contents of the lists property
+    // The tutorial forgot to hide activity indicator
+    // TODO: - Why did they use activityIndicator vs SVProgressHUD?
     private func updateView() {
         let hasRecords = self.lists.count > 0
         
@@ -79,6 +88,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         activityIndicatorView.isHidden = true
     }
     
+    // TODO: - Complete the signature comments
+    // This method gets the recordID for the current iCloud user
+    // passes that to another methoid to get the full record for user
     private func fetchUserRecordID () {
         // Fetch Default Container
         let defaultContainer = CKContainer.default()
@@ -113,16 +125,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else if let userRecord = record {
                 print(userRecord)
             }
-            
         }
-        
     }
-    
 } // class
 
 
+// TODO: - Ask why these methods are an extenstion vs part of the main class
+// In BNR bootcamps, we put these in the class, but our own custom delegates in extensions
 // Put delegate methods in class extension
-// Ask why this is an extenstion vs part of the class
 extension ListViewController
 {
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -133,6 +133,68 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: -
+    // Delete list from the set of lists
+    private func deleteRecord(_ list: CKRecord) {
+        let privateDatabase = CKContainer.default().privateCloudDatabase
+        
+        // SHow progress
+        SVProgressHUD.show()
+        
+        // delete the list
+        privateDatabase.delete(withRecordID: list.recordID) {
+            (recordID, error) -> Void in
+            DispatchQueue.main.sync {
+                SVProgressHUD.dismiss()
+                
+                self.processResponseForDeleteRequest(list, recordID: recordID, error: error)
+            }
+        }
+    }
+    
+    // MARK: -
+    // process delete response by deleting from the list on this tableView
+    private func processResponseForDeleteRequest(_ record: CKRecord, recordID: CKRecord.ID?, error: Error?) {
+        var message = ""
+        
+        if let error = error {
+            print(error)
+            message = "We are unable to delete the list."
+            
+        } else if recordID == nil {
+            message = "We are unable to delete the list."
+        }
+        
+        if message.isEmpty {
+            // Calculate Row Index
+            let index = self.lists.index(of: record)
+            
+            if let index = index {
+                // Update Data Source
+                self.lists.remove(at: index)
+                
+                if lists.count > 0 {
+                    // Update Table View
+                    self.tableView.deleteRows(at: [NSIndexPath(row: index, section: 0) as IndexPath], with: .right)
+                    
+                } else {
+                    // Update Message Label
+                    messageLabel.text = "No Records Found"
+                    
+                    // Update View
+                    updateView()
+                }
+            }
+            
+        } else {
+            // Initialize Alert Controller
+            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            
+            // Present Alert Controller
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: -
     // MARK: Seque Lifecycle
     // To edit a record, the user needs to tap the accessory button of a table view row.
     // This means that we need to implement the tableView(_:accessoryButtonTappedForRowWithIndexPath:)
@@ -197,6 +259,20 @@ extension ListViewController
 {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    // This one allows you to swipe left to delete an item
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // This one selects the row and deletes it
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // get the correct row
+        let list = lists[indexPath.row]
+        
+        // delete it
+        deleteRecord(list)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

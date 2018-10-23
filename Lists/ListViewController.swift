@@ -9,6 +9,7 @@
 import UIKit
 import CloudKit
 import SVProgressHUD
+// cool thing is SV PROGRESS HUD
 
 // TODO: - finish comments to explain everything
 // Notice the AddListViewControllerDelegate to get notifications from the add when the list changes
